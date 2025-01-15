@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Controller, useForm } from "react-hook-form";
-import { createTareas } from "./tareas.api";
+import { createTareas, updateTareas } from "./tareas.api";
 import { useParams, useRouter } from "next/navigation";
 
 type FormData = {
@@ -27,31 +27,37 @@ export function TareasForm({tarea}: any) {
     const router = useRouter();
     const params = useParams();
 
-    const onSubmit = async (data: FormData) => {
+    const onSubmit = handleSubmit(async (data) => {
         try {
-            // Convertir fecha a un objeto Date
+            // Formatear la fecha solo si es necesario
             const formattedData = {
                 ...data,
-                fecha: new Date(data.fecha),
+                fecha: new Date(data.fecha).toISOString().split("T")[0],  // Formato 'YYYY-MM-DD'
             };
-            console.log("Datos enviados:", formattedData);
-
-            await createTareas(formattedData);
-
-            // Redirigir a la ruta principal
+    
+            if (params.id && typeof params.id === "string") {
+                // Editar tarea existente
+                await updateTareas(params.id, formattedData);
+            } else {
+                // Crear nueva tarea
+                await createTareas(formattedData);
+            }
+    
+            // Redirigir a la ruta principal después de la operación
             router.push("/");
         } catch (error) {
-            console.error("Error al crear la tarea:", error);
+            console.error("Error al enviar los datos:", error);
         }
-    };
-
+    });
+    
+    
     const handleCancel = () => {
         // Redirigir a la ruta principal sin realizar ninguna acción
         router.push("/");
     };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <form onSubmit={handleSubmit<FormData>(onSubmit)} className="space-y-4">
             <div>
                 <Label>Titulo</Label>
                 <Input type="text" {...register("titulo", { required: true })} />

@@ -5,7 +5,6 @@ import { TareasTable } from "./tareas/tareas.table";
 
 async function HomePage() {
   const tareas = await getTareas();
-  console.log(tareas);
 
   return (
     <>

@@ -1,8 +1,15 @@
 // Función para obtener tareas
-export async function getTareas(id: string) {
+export async function getTareas() {
     const data = await fetch("http://localhost:4000/api/tareas");
     return await data.json();
 }
+
+// Función para obtener tareas
+export async function obtenerTarea(id: string) {
+    const data = await fetch(`http://localhost:4000/api/tareas/${id}`);
+    return await data.json();
+}
+
 
 // Función para crear tareas
 export async function createTareas(data: any) {
@@ -27,15 +34,11 @@ export async function createTareas(data: any) {
         throw error;
     }
 }
-
 // Función para actualizar tareas
-export async function updateTareas(data: any) {
-    if (!data.id) {
-        throw new Error("El ID de la tarea es obligatorio para actualizar.");
-    }
-
+export async function updateTareas(id: string, data: any) {
     try {
-        const response = await fetch(`http://localhost:4000/api/tareas/${data.id}`, {
+        // Utiliza el parámetro `id` directamente en la URL
+        const response = await fetch(`http://localhost:4000/api/tareas/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

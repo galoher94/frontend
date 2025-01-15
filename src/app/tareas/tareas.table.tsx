@@ -26,7 +26,8 @@ export function TareasTable({ tareas }: { tareas: any[] }) {
     }
     return (
 
-<Table className="border-collapse border border-gray-300 shadow-lg rounded-lg w-full" >
+<Table className="border-collapse border border-gray-300 shadow-lg rounded-lg w-full" 
+>
           <TableHeader>
             <TableRow className="bg-gradient-to-r from-sky-300 to-blue-400 text-white">
               <TableHead className="px-4 py-2 text-center text-black">ID</TableHead>
@@ -48,7 +49,7 @@ export function TareasTable({ tareas }: { tareas: any[] }) {
                 <TableCell className="px-4 py-2">{tarea.id}</TableCell>
                 <TableCell className="px-4 py-2">{tarea.titulo}</TableCell>
                 <TableCell className="px-4 py-2">{tarea.descripcion}</TableCell>
-                <TableCell className="px-4 py-2">{new Date(tarea.fecha).toLocaleDateString()}</TableCell>
+                <TableCell className="px-4 py-2">{tarea.fecha}</TableCell>
                 <TableCell className="px-4 py-2">{tarea.prioridad}</TableCell>
                 <TableCell className="px-4 py-2">{tarea.estado}</TableCell>
                 <TableCell className="px-4 py-2">
