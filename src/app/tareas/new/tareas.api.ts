@@ -34,30 +34,30 @@ export async function createTareas(data: any) {
         throw error;
     }
 }
-// Función para actualizar tareas
-export async function updateTareas(id: string, data: any) {
-    try {
-        // Utiliza el parámetro `id` directamente en la URL
-        const response = await fetch(`http://localhost:4000/api/tareas/${id}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-        });
+export async function updateTareas(id: string | number, data: any) {
+    const numericId = typeof id === "string" ? parseInt(id, 10) : id;
 
-        if (!response.ok) {
-            const error = await response.json();
-            console.error("Error en el servidor:", error);
-            throw new Error("Error al actualizar la tarea");
-        }
-
-        return await response.json();
-    } catch (error) {
-        console.error("Error al enviar datos:", error);
-        throw error;
+    if (isNaN(numericId)) {
+        throw new Error("El parámetro `id` no es un número válido.");
     }
+
+    const response = await fetch(`http://localhost:4000/api/tareas/${numericId}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+        const error = await response.json();
+        console.error("Error en el servidor:", error);
+        throw new Error("Error al actualizar la tarea");
+    }
+
+    return await response.json();
 }
+
 
 // Función para eliminar tareas
 export async function deleteTareas(id: number) {

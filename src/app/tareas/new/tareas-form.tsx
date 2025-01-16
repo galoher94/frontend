@@ -9,6 +9,7 @@ import { createTareas, updateTareas } from "./tareas.api";
 import { useParams, useRouter } from "next/navigation";
 
 type FormData = {
+    id?: number;
     titulo: string;
     descripcion: string;
     fecha: string; // Formato inicial de fecha será string
@@ -28,7 +29,6 @@ export function TareasForm({tarea}: any) {
     const params = useParams();
 
     const onSubmit = handleSubmit(async (data) => {
-        try {
             // Formatear la fecha solo si es necesario
             const formattedData = {
                 ...data,
@@ -43,11 +43,8 @@ export function TareasForm({tarea}: any) {
                 await createTareas(formattedData);
             }
     
-            // Redirigir a la ruta principal después de la operación
+            // Redirigir a la ruta principal
             router.push("/");
-        } catch (error) {
-            console.error("Error al enviar los datos:", error);
-        }
     });
     
     
@@ -57,7 +54,7 @@ export function TareasForm({tarea}: any) {
     };
 
     return (
-        <form onSubmit={handleSubmit<FormData>(onSubmit)} className="space-y-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div>
                 <Label>Titulo</Label>
                 <Input type="text" {...register("titulo", { required: true })} />
@@ -117,7 +114,7 @@ export function TareasForm({tarea}: any) {
                 />
             </fieldset>
             <div className="p-4 flex justify-between">
-                <Button type="button" onClick={handleCancel} variant="outline" className="w-1/2 mr-2">Cancelar</Button>
+                <Button type="button" onClick={handleCancel} variant="outline" className="w-24 mr-2 ">Cancelar</Button>
                 <Button>
                     {params.id ? "Actualizar" : "Crear"}
                 </Button>
