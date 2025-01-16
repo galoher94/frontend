@@ -2,7 +2,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import TareasForm from "./tareas-form"; // Importa TareasForm
 import {obtenerTarea } from "./tareas.api";
  
-
 interface Props {
   params: {
     id: string;
@@ -17,11 +16,11 @@ async function TareasNewPage({params}:Props) {
       <Card className="w-[350px] shadow-lg bg-white">
         <CardHeader>
           <CardTitle className="text-center text-xl font-semibold">
-            { params.id? "Actualizar Tarea" : "Crear Tarea"    }
+            { params.id? "Actualizar Tarea" : "Crear Tarea" } 
           </CardTitle>
         </CardHeader>
         <CardContent>
-          {/* Aquí llamas al formulario TareasForm */}
+          {/* Aquí paso la tarea al formulario TareasForm */}
           <TareasForm tarea={tarea}/>
         </CardContent>
       </Card>
@@ -30,4 +29,3 @@ async function TareasNewPage({params}:Props) {
 }
 
 export default TareasNewPage;
-

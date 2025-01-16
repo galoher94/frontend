@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -27,25 +28,37 @@ export default function LoginPage() {
       console.error(err);
     }
   };
-
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <h1 className="text-2xl font-bold">Inicia Sesión</h1>
-      <Input
-        type="email"
-        placeholder="Correo electrónico"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
-      <Input
-        type="password"
-        placeholder="Contraseña"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
-      <Button type="submit">Entrar</Button>
-    </form>
+    <Card className="max-w-md mx-auto space-y-6">
+      <CardHeader>
+        <CardTitle className="text-center text-2xl font-bold">Inicia Sesión</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <Input
+            type="email"
+            placeholder="Correo electrónico"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <Input
+            type="password"
+            placeholder="Contraseña"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <Button type="submit" className="w-full">
+            Entrar
+          </Button>
+        </form>
+      </CardContent>
+      <CardFooter className="text-center">
+        <p className="text-sm text-muted-foreground">
+          ¿No tienes una cuenta? <a href="/register" className="text-blue-500 hover:underline">Regístrate aquí</a>
+        </p>
+      </CardFooter>
+    </Card>
   );
 }
