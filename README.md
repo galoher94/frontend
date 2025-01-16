@@ -1,36 +1,97 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Frontend README
 
-## Getting Started
+## Proyecto: Gestión de Tareas (Frontend)
 
-First, run the development server:
+Este proyecto es la interfaz de usuario para una aplicación de gestión de tareas. Desarrollada con **Next.js**, utiliza **JWT** para autenticación y **Shadcn/ui** para componentes visuales estilizados.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### Características
+- **Autenticación de Usuarios**: Login y Registro.
+- **Protección de Rutas**: Acceso restringido basado en tokens JWT.
+- **Gestión de Tareas**: CRUD de tareas integrado con el backend.
+
+---
+
+## Requisitos Previos
+
+### Dependencias del Proyecto
+Asegúrate de tener las siguientes herramientas instaladas:
+- [Node.js](https://nodejs.org/) (v16 o superior)
+- [npm](https://www.npmjs.com/) o [yarn](https://yarnpkg.com/)
+
+### Variables de Entorno
+Crea un archivo `.env.local` en la raíz del proyecto con las siguientes variables:
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:5000/api
+JWT_SECRET=tu_secreto_seguro
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`NEXT_PUBLIC_API_URL` apunta a la URL del backend para las peticiones API.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Instalación y Uso
 
-## Learn More
+### 1. Instalar Dependencias
+```bash
+npm install
+# o
+yarn install
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 2. Ejecutar el Proyecto en Desarrollo
+```bash
+npm run dev
+# o
+yarn dev
+```
+Accede a `http://localhost:3000` en tu navegador.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 3. Generar la Build para Producción
+```bash
+npm run build
+# o
+yarn build
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## Estructura del Proyecto
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```plaintext
+/app
+  ├── auth
+  │    ├── login          # Página de Login
+  │    ├── register       # Página de Registro
+  ├── tareas              # CRUD de Tareas
+  ├── layout.tsx          # Layout principal
+  ├── page.tsx            # Página inicial
+/components              # Componentes reutilizables
+/styles                  # Archivos CSS
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## Rutas del Frontend
+
+### Públicas
+- `/auth/login` - Página de inicio de sesión.
+- `/auth/register` - Página de registro de usuario.
+
+### Protegidas
+- `/tareas` - Listado y CRUD de tareas (requiere autenticación).
+
+---
+
+## Repositorio en GITHUB
+https://github.com/galoher94/frontend.git
+
+## Contribuciones
+1. Crea un fork del proyecto.
+2. Crea una rama para tu nueva característica: `git checkout -b feature/nueva-funcionalidad`.
+3. Realiza commits descriptivos: `git commit -m "Añade nueva funcionalidad"`.
+4. Envía un pull request a la rama principal.
+
+## Funciones pendientes
+1. Ajustar el Login para que se conecte con la DB
+2. Register aun posee error al redireccionar y guardar datos en DB
