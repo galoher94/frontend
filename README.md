@@ -22,7 +22,7 @@ Asegúrate de tener las siguientes herramientas instaladas:
 Crea un archivo `.env.local` en la raíz del proyecto con las siguientes variables:
 
 ```env
-NEXT_PUBLIC_API_URL=http://localhost:5000/api
+NEXT_PUBLIC_API_URL=http://localhost:4000/api
 JWT_SECRET=tu_secreto_seguro
 ```
 
